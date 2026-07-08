@@ -1,0 +1,52 @@
+package sphe.com;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CsvReader {
+
+    public Spreadsheet read(InputStream input) throws IOException {
+
+        List<String[]> rows = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(input))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                rows.add(line.split(",",  -1));
+            }
+        }
+
+        int maxColumns = rows.stream()
+                .mapToInt( r -> r.length)
+                .max()
+                .orElse(0);
+
+        Spreadsheet spreadsheet = new Spreadsheet(rows.size(), maxColumns);
+
+        for (int row = 0; row < rows.size(); row++) {
+
+            String [] values = rows.get(row);
+
+            for (int col = 0; col < maxColumns; col++) {
+                String value = col <  values.length ? values[col].trim() : "";
+                spreadsheet.setCell(row, col, createCell(value, spreadsheet));
+            }
+        }
+
+        return spreadsheet;
+    }
+
+    private Cell createCell(String value, Spreadsheet spreadsheet) {
+        if (value.isBlank()) {
+            return new StringCell(spreadsheet, "");
+        }
+
+        return new StringCell(spreadsheet, value);
+
+    }
+}
