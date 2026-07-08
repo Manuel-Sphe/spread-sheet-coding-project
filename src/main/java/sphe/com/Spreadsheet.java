@@ -1,5 +1,7 @@
 package sphe.com;
 
+import java.lang.invoke.CallSite;
+
 public class Spreadsheet {
 
     private final Cell[][] cells;
@@ -16,7 +18,11 @@ public class Spreadsheet {
         cells[row][col] = cell;
     }
 
-    public Cell getCell(int reference) {
-        return null;
+    public int getRowCount() {
+        return cells.length;
     }
+    public int getColCount() {
+        return cells.length == 0  ? 0 : cells[0].length;
+    }
+
 }
