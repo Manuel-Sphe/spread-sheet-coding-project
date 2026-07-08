@@ -1,23 +1,36 @@
 package org.spreadsheet.io;
 
-import org.spreadsheet.cell.*;
+import org.spreadsheet.cell.Cell;
+import org.spreadsheet.cell.HorizontalLineCell;
+import org.spreadsheet.cell.NumberCell;
+import org.spreadsheet.cell.ProductCell;
+import org.spreadsheet.cell.StringCell;
+import org.spreadsheet.cell.SumCell;
 import org.spreadsheet.model.Spreadsheet;
-import sphe.com.cell.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CsvReader {
 
+    public Spreadsheet read(Path inputFile) throws IOException {
+        try (InputStream input = Files.newInputStream(inputFile)) {
+            return read(input);
+        }
+    }
+
     public Spreadsheet read(InputStream input) throws IOException {
 
         List<String[]> rows = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(input))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
 
             String line;
             while ((line = br.readLine()) != null) {
