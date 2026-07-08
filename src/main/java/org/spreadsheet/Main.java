@@ -1,22 +1,23 @@
 package org.spreadsheet;
 
-import org.spreadsheet.io.CsvReader;
-import org.spreadsheet.model.Spreadsheet;
-import org.spreadsheet.renderer.SpreadsheetRenderer;
-
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.Path;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
 
+    private static final String USAGE = "Usage: java -jar spread-sheet-coding-project.jar <input.csv> <output.txt>";
 
-        InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("input.csv");
+    public static void main(String[] args) {
+        if (args.length != 2) {
+            System.err.println(USAGE);
+            System.exit(1);
+        }
 
-        Spreadsheet sheet = new CsvReader().read(inputStream);
-
-        String out = new SpreadsheetRenderer().render(sheet);
-
-        System.out.println(out);
+        try {
+            new SpreadsheetApplication().run(Path.of(args[0]), Path.of(args[1]));
+        } catch (IOException e) {
+            System.err.println("Failed to process spreadsheet: " + e.getMessage());
+            System.exit(1);
+        }
     }
 }
