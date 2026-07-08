@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -20,7 +21,21 @@ class CsvReaderTest {
     private final CsvReader reader = new CsvReader();
 
     @Test
-    void readsInputCsvFromClasspath() throws IOException {
+    void readsInputCsvFromFilePath() throws IOException {
+        Path input = Path.of("src/main/resources/input.csv");
+        Spreadsheet sheet = reader.read(input);
+
+        assertEquals(9, sheet.getRowCount());
+        assertEquals(3, sheet.getColumnCount());
+        assertEquals("Values", sheet.getCell(0, 0).display());
+        assertEquals("Factor", sheet.getCell(0, 1).display());
+        assertInstanceOf(NumberCell.class, sheet.getCell(2, 0));
+        assertInstanceOf(ProductCell.class, sheet.getCell(2, 2));
+        assertInstanceOf(SumCell.class, sheet.getCell(6, 2));
+    }
+
+    @Test
+    void readsInputCsvFromClasspathStream() throws IOException {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("input.csv")) {
             Spreadsheet sheet = reader.read(input);
 
