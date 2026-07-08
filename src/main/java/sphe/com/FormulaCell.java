@@ -17,6 +17,11 @@ public abstract class FormulaCell extends Cell {
         return Double.toString(getValue());
     }
 
+    @Override
+    public boolean isNumeric() {
+        return true;
+    }
+
     protected abstract double getValue();
 
     private List<CellReference> parseReferences(String formula) {
