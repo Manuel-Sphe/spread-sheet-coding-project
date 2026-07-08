@@ -47,7 +47,7 @@ public class CsvReader {
         }
 
         if (value.equals("#hl")) {
-            return new HorizontalCell(spreadsheet);
+            return new HorizontalLineCell(spreadsheet);
         }
 
         if (value.startsWith("#(sum")) {

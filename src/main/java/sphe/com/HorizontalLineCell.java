@@ -1,8 +1,8 @@
 package sphe.com;
 
-public class HorizontalCell extends Cell {
+public class HorizontalLineCell extends Cell {
 
-    public HorizontalCell(Spreadsheet spreadsheet) {
+    public HorizontalLineCell(Spreadsheet spreadsheet) {
         super(spreadsheet);
     }
 

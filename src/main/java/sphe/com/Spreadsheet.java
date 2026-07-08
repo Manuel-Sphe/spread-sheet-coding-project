@@ -21,7 +21,8 @@ public class Spreadsheet {
     public int getRowCount() {
         return cells.length;
     }
-    public int getColCount() {
+
+    public int getColumnCount() {
         return cells.length == 0  ? 0 : cells[0].length;
     }
 

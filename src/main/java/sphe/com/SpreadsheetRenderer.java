@@ -5,28 +5,30 @@ public class SpreadsheetRenderer {
     public String render(Spreadsheet spreadsheet) {
 
         int rows = spreadsheet.getRowCount();
-        int cols = spreadsheet.getColCount();
+        int cols = spreadsheet.getColumnCount();
 
         String[][] values = new String[rows][cols];
+        int[] columnWidths = new int[cols];
 
-        // Determine a single width for every column
-        int width = 0;
-
+        // Pass 1: evaluate cells and determine column widths
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
 
                 Cell cell = spreadsheet.getCell(row, col);
 
-                String value = cell.display();
-                values[row][col] = value;
+                values[row][col] = cell.display();
 
-                if (!(cell instanceof HorizontalCell)) {
-                    width = Math.max(width, value.length());
+                // Horizontal lines don't contribute to width
+                if (!(cell instanceof HorizontalLineCell)) {
+                    columnWidths[col] = Math.max(
+                            columnWidths[col],
+                            values[row][col].length());
                 }
             }
         }
 
-        StringBuilder out = new StringBuilder();
+        // Pass 2: render
+        StringBuilder output = new StringBuilder();
 
         for (int row = 0; row < rows; row++) {
 
@@ -34,37 +36,31 @@ public class SpreadsheetRenderer {
 
                 Cell cell = spreadsheet.getCell(row, col);
 
-                if (cell instanceof HorizontalCell) {
+                if (cell instanceof HorizontalLineCell) {
 
-                    out.append("-".repeat(width));
+                    output.append("-".repeat(columnWidths[col]));
 
                 } else if (cell.isNumeric()) {
 
-                    out.append(String.format(
-                            "%" + width + "s",
-                            values[row][col]
-                    ));
+                    output.append(String.format(
+                            "%" + columnWidths[col] + "s",
+                            values[row][col]));
 
                 } else {
 
-                    out.append(String.format(
-                            "%-" + width + "s",
-                            values[row][col]
-                    ));
+                    output.append(String.format(
+                            "%-" + columnWidths[col] + "s",
+                            values[row][col]));
                 }
 
-                // Separator only between columns
                 if (col < cols - 1) {
-                    out.append("|");
+                    output.append("|");
                 }
             }
 
-            // Don't add a blank line after the last row
-            if (row < rows - 1) {
-                out.append(System.lineSeparator());
-            }
+            output.append(System.lineSeparator());
         }
 
-        return out.toString();
+        return output.toString();
     }
 }
