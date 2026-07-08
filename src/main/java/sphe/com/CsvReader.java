@@ -46,6 +46,23 @@ public class CsvReader {
             return new StringCell(spreadsheet, "");
         }
 
+        if (value.equals("#hl")) {
+            return new HorizontalCell(spreadsheet);
+        }
+
+        if (value.startsWith("#(sum")) {
+            return new SumCell(spreadsheet, value);
+        }
+
+        if (value.startsWith("#(prod")) {
+            return new ProductCell(spreadsheet, value);
+        }
+
+        try {
+            return new NumberCell(spreadsheet, Double.parseDouble(value));
+        } catch (NumberFormatException ignored) { }
+
+
         return new StringCell(spreadsheet, value);
 
     }
