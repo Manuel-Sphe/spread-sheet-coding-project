@@ -2,31 +2,40 @@ package org.spreadsheet.model;
 
 import org.junit.jupiter.api.Test;
 
+import org.spreadsheet.cell.NumberCell;
+import org.spreadsheet.cell.StringCell;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
-class CellReferenceTest {
+class SpreadsheetTest {
 
     @Test
-    void parsesSingleLetterColumn() {
-        CellReference reference = CellReference.parse("A3");
+    void storesAndReturnsCellsByCoordinate() {
+        Spreadsheet sheet = new Spreadsheet(2, 2);
+        StringCell topLeft = new StringCell(sheet, "label");
+        NumberCell bottomRight = new NumberCell(sheet, 42);
 
-        assertEquals(2, reference.row());
-        assertEquals(0, reference.column());
+        sheet.setCell(0, 0, topLeft);
+        sheet.setCell(1, 1, bottomRight);
+
+        assertSame(topLeft, sheet.getCell(0, 0));
+        assertSame(bottomRight, sheet.getCell(1, 1));
     }
 
     @Test
-    void parsesColumnB() {
-        CellReference reference = CellReference.parse("B5");
+    void reportsRowAndColumnCounts() {
+        Spreadsheet sheet = new Spreadsheet(3, 4);
 
-        assertEquals(4, reference.row());
-        assertEquals(1, reference.column());
+        assertEquals(3, sheet.getRowCount());
+        assertEquals(4, sheet.getColumnCount());
     }
 
     @Test
-    void parsesColumnC() {
-        CellReference reference = CellReference.parse("c6");
+    void emptySpreadsheetHasNoColumns() {
+        Spreadsheet sheet = new Spreadsheet(0, 0);
 
-        assertEquals(5, reference.row());
-        assertEquals(2, reference.column());
+        assertEquals(0, sheet.getRowCount());
+        assertEquals(0, sheet.getColumnCount());
     }
 }
