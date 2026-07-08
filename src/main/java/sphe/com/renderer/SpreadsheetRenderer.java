@@ -1,4 +1,8 @@
-package sphe.com;
+package sphe.com.renderer;
+
+import sphe.com.cell.Cell;
+import sphe.com.cell.HorizontalLineCell;
+import sphe.com.model.Spreadsheet;
 
 public class SpreadsheetRenderer {
 

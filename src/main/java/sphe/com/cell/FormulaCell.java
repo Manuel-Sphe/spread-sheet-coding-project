@@ -1,4 +1,7 @@
-package sphe.com;
+package sphe.com.cell;
+
+import sphe.com.model.CellReference;
+import sphe.com.model.Spreadsheet;
 
 import java.util.ArrayList;
 import java.util.List;

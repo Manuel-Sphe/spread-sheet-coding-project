@@ -1,4 +1,4 @@
-package sphe.com;
+package sphe.com.model;
 
 public record CellReference(int row, int column) {
 

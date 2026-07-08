@@ -1,4 +1,6 @@
-package sphe.com;
+package sphe.com.cell;
+
+import sphe.com.model.Spreadsheet;
 
 public class NumberCell extends Cell {
 

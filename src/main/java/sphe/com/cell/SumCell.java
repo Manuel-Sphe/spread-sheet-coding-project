@@ -1,8 +1,11 @@
-package sphe.com;
+package sphe.com.cell;
+
+import sphe.com.model.CellReference;
+import sphe.com.model.Spreadsheet;
 
 public class SumCell extends FormulaCell {
 
-    protected SumCell(Spreadsheet spreadsheet, String formula) {
+    public SumCell(Spreadsheet spreadsheet, String formula) {
         super(spreadsheet, formula);
     }
 
