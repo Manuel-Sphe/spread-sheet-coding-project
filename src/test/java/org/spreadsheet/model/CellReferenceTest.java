@@ -1,4 +1,4 @@
-package sphe.com.model;
+package org.spreadsheet.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 

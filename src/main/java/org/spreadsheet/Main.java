@@ -1,8 +1,8 @@
-package sphe.com;
+package org.spreadsheet;
 
-import sphe.com.io.CsvReader;
-import sphe.com.model.Spreadsheet;
-import sphe.com.renderer.SpreadsheetRenderer;
+import org.spreadsheet.io.CsvReader;
+import org.spreadsheet.model.Spreadsheet;
+import org.spreadsheet.renderer.SpreadsheetRenderer;
 
 import java.io.IOException;
 import java.io.InputStream;

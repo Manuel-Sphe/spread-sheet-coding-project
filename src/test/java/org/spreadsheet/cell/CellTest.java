@@ -1,4 +1,4 @@
-package sphe.com.cell;
+package org.spreadsheet.cell;
 
 import static org.junit.jupiter.api.Assertions.*;
 

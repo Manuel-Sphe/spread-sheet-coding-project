@@ -1,6 +1,6 @@
-package sphe.com.cell;
+package org.spreadsheet.cell;
 
-import sphe.com.model.Spreadsheet;
+import org.spreadsheet.model.Spreadsheet;
 
 public class HorizontalLineCell extends Cell {
 

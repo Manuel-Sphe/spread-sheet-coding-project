@@ -1,8 +1,8 @@
-package sphe.com.renderer;
+package org.spreadsheet.renderer;
 
-import sphe.com.cell.Cell;
-import sphe.com.cell.HorizontalLineCell;
-import sphe.com.model.Spreadsheet;
+import org.spreadsheet.cell.Cell;
+import org.spreadsheet.cell.HorizontalLineCell;
+import org.spreadsheet.model.Spreadsheet;
 
 public class SpreadsheetRenderer {
 

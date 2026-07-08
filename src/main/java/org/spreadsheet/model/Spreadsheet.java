@@ -1,6 +1,6 @@
-package sphe.com.model;
+package org.spreadsheet.model;
 
-import sphe.com.cell.Cell;
+import org.spreadsheet.cell.Cell;
 
 public class Spreadsheet {
 

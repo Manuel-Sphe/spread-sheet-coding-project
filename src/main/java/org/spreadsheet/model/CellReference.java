@@ -1,4 +1,4 @@
-package sphe.com.model;
+package org.spreadsheet.model;
 
 public record CellReference(int row, int column) {
 

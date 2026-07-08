@@ -1,7 +1,7 @@
-package sphe.com.cell;
+package org.spreadsheet.cell;
 
-import sphe.com.model.CellReference;
-import sphe.com.model.Spreadsheet;
+import org.spreadsheet.model.CellReference;
+import org.spreadsheet.model.Spreadsheet;
 
 public class SumCell extends FormulaCell {
 
